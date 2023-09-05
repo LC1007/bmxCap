@@ -66,13 +66,17 @@ module.exports = {
             if(!user){
                 return res.status(400).json({ msg: info.message });
             }
-            req.logIn(user, (loginErr) =>{
+            req.logIn(user, async (loginErr) =>{
                 if(loginErr){
                     return next(loginErr)
                 }
                 const token = createToken(user);
+
+                const userData = await User.findUserByEmail(user.emailAdd)
+
                 return res.json({ 
                     token,
+                    result: userData,
                     msg: "Login successful" 
                 });
             })
