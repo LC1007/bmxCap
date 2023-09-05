@@ -5,6 +5,7 @@ const authRoutes = require("./routes/authRoutes");
 const prodRoutes = require("./routes/prodRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const app = express();
 
@@ -14,8 +15,20 @@ app.use(
   session({ secret: "secret_key_test", resave: true, saveUninitialized: true }),
   passport.initialize(),
   passport.session(),
-  cookieParser()
+  cookieParser(),
+  cors()
 );
+
+// Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Request-Methods", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Expose-Headers", "Authorization");
+  next();
+});
 
 // Routes
 app.use('/auth', authRoutes)
