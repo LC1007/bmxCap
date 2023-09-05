@@ -11,6 +11,17 @@ class User {
     }
   }
 
+  static async fetchUsers(){
+    try {
+      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, userRole FROM Users`
+      const [results] = await db.query(query)
+      return results
+    } catch (error) {
+      console.error("Error in fetching users:", error);
+      throw error; // Rethrow the error to handle it in the calling function
+    }
+  }
+
   static async findUserByEmail(emailAdd) {
     try {
       console.log("Trying to find user with email:", emailAdd);

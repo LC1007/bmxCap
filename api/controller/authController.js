@@ -45,6 +45,19 @@ module.exports = {
         }
     },
 
+    async fetchUsers(req, res){
+        try {
+            const users = await User.fetchUsers()
+
+            return res.json({
+              status: res.statusCode,
+              users,
+            });
+        } catch (error) {
+            
+        }
+    },
+
     async login(req, res, next){
         passport.authenticate('local', (err, user, info) =>{
             if(err){
