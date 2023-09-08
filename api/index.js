@@ -4,6 +4,7 @@ const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
 const prodRoutes = require("./routes/prodRoutes");
 const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 app.use('/', authRoutes)
 app.use("/", prodRoutes);
 app.use("/", userRoutes);
+app.use("/", orderRoutes);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () =>{
