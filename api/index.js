@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/auth', authRoutes)
+app.use('/', authRoutes)
 app.use("/", prodRoutes);
 app.use("/", userRoutes);
 

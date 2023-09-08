@@ -3,9 +3,6 @@ const Products = require('../model/Products')
 module.exports = {
   async fetchProducts(req, res) {
     try {
-        // const data = req.body;
-        // await Products.createProduct(data);
-
         const products = await Products.fetchProducts()
 
         return res.json({
@@ -16,21 +13,33 @@ module.exports = {
         console.log(error);
         res
           .status(500)
-          .json({ error: "An error occurred while creating the product" });
+          .json({ error: "An error occurred while fetching products" });
     }
   },
 
   async fetchProduct(req, res){
     try {
-        const { prodID } = req.params;
-        const product = await Products.fetchProduct(prodID);
+        const { bmxID } = req.params;
+        const [result] = await Products.fetchProduct(bmxID);
         
-        return res.json({
-          status: res.statusCode,
-          product,
-        });
+        if (!result) {
+    
+          return res.status(404).json({
+            status: 404,
+            msg: "Product not found",
+          });
+        } 
+
+          return res.json({
+            status: res.statusCode,
+            result,
+          });
+        
+
     } catch (error) {
-        
+        res
+          .status(500)
+          .json({ error: "An error occurred while fetching the product" });
     }
   },
 
@@ -45,7 +54,9 @@ module.exports = {
           product,
         });
     } catch (error) {
-        
+        res
+          .status(500)
+          .json({ error: "An error occurred while creaeting the product" });
     }
   }
 

@@ -11,7 +11,7 @@ passport.use(
         const user = await User.findUserByEmail(emailAdd);
 
         if (!user) {
-          return done(null, false, { message: "Incorrect email address" });
+          return done(null, false, { msg: "Incorrect email address" });
         }
 
         const passwordMatch = await bcrypt.compare(userPass, user.userPass);
@@ -20,7 +20,6 @@ passport.use(
           return done(null, false, { msg: "Incorrect Password" });
         }
 
-        console.log("Authentication successful");
         return done(null, user);
       } catch (error) {
         return done(error);
