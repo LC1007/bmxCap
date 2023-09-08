@@ -77,8 +77,10 @@ module.exports = {
                 return res.json({ 
                     token,
                     result: userData,
+                    userID: userData.userID,
                     msg: "Login successful" 
                 });
+
             })
         })(req, res, next)
     },
