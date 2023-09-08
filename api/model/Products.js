@@ -11,10 +11,10 @@ class Products{
         }
     }
 
-    static async fetchProduct(prodID){
+    static async fetchProduct(bmxID){
         try {
-            const query = `SELECT bmxID, prodName, prodDesc, quantity, amount, category, prodUrl FROM Products WHERE prodID = ?`;
-            const [result] = await db.query(query, [prodID])
+            const query = `SELECT bmxID, prodName, prodDesc, quantity, amount, category, prodUrl FROM Products WHERE bmxID = ?`;
+            const [result] = await db.query(query, [bmxID])
             return result
         } catch (error) {
             throw error;
