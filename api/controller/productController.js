@@ -32,7 +32,7 @@ module.exports = {
 
           return res.json({
             status: res.statusCode,
-            bmxID: result.bmxID,
+            ID: result.bmxID,
             result
           });
         
