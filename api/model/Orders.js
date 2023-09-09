@@ -19,7 +19,7 @@ class Orders {
   static async fetchOrders(userID){
     try {
         const query = `SELECT orderID, userID, bmxID, prodName, amount, prodUrl, orderDate FROM Orders WHERE userID = ?`;
-        const [results] = await db.query(query, [userID]);
+        const results = await db.query(query, [userID]);
         return results;
     } catch (error) {
         console.log(error);
