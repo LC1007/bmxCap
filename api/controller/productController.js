@@ -32,8 +32,10 @@ module.exports = {
 
           return res.json({
             status: res.statusCode,
-            ID: result.bmxID,
-            result
+            data: {
+              ID: result.bmxID,
+              result,
+            }
           });
         
 
