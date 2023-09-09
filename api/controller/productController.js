@@ -20,7 +20,7 @@ module.exports = {
   async fetchProduct(req, res){
     try {
         const { bmxID } = req.params;
-        const [result] = await Products.fetchProduct(bmxID);
+        const result = await Products.fetchProduct(bmxID);
         
         if (!result) {
     
@@ -32,10 +32,8 @@ module.exports = {
 
           return res.json({
             status: res.statusCode,
-            data: {
-              ID: result.bmxID,
-              result,
-            }
+            ID: result[0].bmxID,
+            result,
           });
         
 
