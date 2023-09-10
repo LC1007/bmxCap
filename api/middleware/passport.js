@@ -3,9 +3,8 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const User = require('../model/User')
 
-passport.use(
-  new LocalStrategy(
-    { usernameField: "emailAdd", passwordField: "userPass" },
+passport.use(new LocalStrategy({ usernameField: "emailAdd", passwordField: "userPass" },
+
     async (emailAdd, userPass, done) => {
       try {
         const user = await User.findUserByEmail(emailAdd);

@@ -9,7 +9,6 @@ class Orders {
                      CROSS JOIN Products p
                      WHERE u.userID = ? AND p.bmxID = ?;`;
       const [result] = await db.query(query,[userID, bmxID])
-      console.log('running');
       return result
     } catch (error) {
         console.log(error);
@@ -19,10 +18,22 @@ class Orders {
   static async fetchOrders(userID){
     try {
         const query = `SELECT orderID, userID, bmxID, prodName, amount, prodUrl, orderDate FROM Orders WHERE userID = ?`;
-        const results = await db.query(query, [userID]);
+        const [results] = await db.query(query, [userID]);
+ 
         return results;
     } catch (error) {
         console.log(error);
+    }
+  }
+
+  static async deleteOrder(orderID){
+    try {
+      const query = `DELETE FROM Orders WHERE orderID = ?`
+      const [result] = await db.query(query, [orderID])
+
+      return result
+    } catch (error) {
+      console.log(error);
     }
   }
 }

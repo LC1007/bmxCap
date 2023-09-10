@@ -8,14 +8,14 @@ module.exports = {
             console.log("User ID:", userID, "bmxID:", bmxID);
 
             if(!result){
-                return res.status(500).json({
+                return res.status(404).json({
                     status: 404,
                     msg: "Something went wrong trying to add product to the cart"
                 })
             }
 
-            return res.json({
-                status: res.statusCode,
+            return res.status(201).json({
+                status: 201,
                 result
             })
 
@@ -27,20 +27,50 @@ module.exports = {
     },
 
     async fetchOrders(req, res){
-        const { userID } = req.params
-        const [results] = await Orders.fetchOrders(userID)
-        console.log(userID);
+        try {
+            const { userID } = req.params;
+            const orders = await Orders.fetchOrders(userID);
 
-        if(!results){
-            return res.status(404).json({
+            if (orders.length === 0) {
+              return res.status(404).json({
                 status: 404,
-                msg: 'No orders found'
+                msg: "No orders found",
+              });
+            }
+
+            return res.json({
+              status: res.statusCode,
+              orders,
+            });
+        } catch (error) {
+            res
+              .status(500)
+              .json({
+                error: "An error occurred while fetching the orders",
+              });
+        }
+    },
+
+    async deleteOrder(req, res){
+        try {
+            const { orderID } = req.params;
+            const order = await Orders.deleteOrder(orderID);
+
+            if (order.affectedRows === 0) {
+              return res.json({
+                status: res.statusCode,
+                msg: "Order not found",
+              });
+            }
+
+            return res.json({
+                status: res.statusCode,
+                msg: 'Order has been deleted'
             })
+        } catch (error) {
+            console.log(error);
         }
 
-        return res.json({
-            status: res.statusCode,
-            results
-        })
+        
     }
 }

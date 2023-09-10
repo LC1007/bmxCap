@@ -31,6 +31,27 @@ class Products {
       throw error;
     }
   }
+
+  static async updateProduct(product, bmxID){
+    try {
+      const query = `UPDATE Products SET ? WHERE bmxID = ?`
+      const [result] = await db.query(query, [product, bmxID])
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  static async deleteProduct(bmxID){
+    try {
+      const query = `DELETE FROM Products WHERE bmxID = ?`;
+      const [result] = await db.query(query, [bmxID]);
+
+      return result;
+    } catch (error) {
+      console.log('An error occurred while trying to delete the product:', error);
+    }
+  }
 }
 
 module.exports = Products
