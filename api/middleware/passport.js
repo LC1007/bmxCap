@@ -10,13 +10,13 @@ passport.use(new LocalStrategy({ usernameField: "emailAdd", passwordField: "user
         const user = await User.findUserByEmail(emailAdd);
 
         if (!user) {
-          return done(null, false, { msg: "Incorrect email address" });
+          return done(null, false, { errMsg: "Incorrect email address" });
         }
 
         const passwordMatch = await bcrypt.compare(userPass, user.userPass);
 
         if (!passwordMatch) {
-          return done(null, false, { msg: "Incorrect Password" });
+          return done(null, false, { errMsg: "Incorrect Password" });
         }
 
         return done(null, user);

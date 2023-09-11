@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) =>{
         })  
     } else{
         res.json({
-            msg: 'You need to login to visit /products'
+            errMsg: 'You need to login to visit /products'
         })
     }
 }

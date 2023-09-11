@@ -22,7 +22,7 @@ module.exports = {
             if(existingUser){
                 return res.status(400).json({
                     status: 400,
-                    msg: 'A user with this email already exists'
+                    errMsg: 'A user with this email already exists'
                 })
             }
 
@@ -62,7 +62,7 @@ module.exports = {
             if(!users){
                 return res.status(400).json({
                     status: 400,
-                    msg: 'Unable to fetch users'
+                    errMsg: 'Unable to fetch users'
                 })
             }
 
@@ -74,7 +74,7 @@ module.exports = {
             console.log(error);
             res
               .status(500)
-              .json({ msg: "An error occurred while trying to fetch users" });
+              .json({ errMsg: "An error occurred while trying to fetch users" });
         }
     },
 
@@ -86,7 +86,7 @@ module.exports = {
              if (!user) {
                return res.status(400).json({
                  status: 400,
-                 msg: "Unable to fetch user",
+                 errMsg: "Unable to fetch user",
                });
              }
 
@@ -98,7 +98,7 @@ module.exports = {
             console.log(error);
             res
               .status(500)
-              .json({ msg: "An error occurred while trying to fetch user" });
+              .json({ errMsg: "An error occurred while trying to fetch user" });
         }
     },
 
