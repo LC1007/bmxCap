@@ -92,7 +92,7 @@ module.exports = {
 
             return res.json({
               status: res.statusCode,
-              user  
+              user
             })
         } catch (error) {
             console.log(error);

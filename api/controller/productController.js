@@ -139,7 +139,35 @@ module.exports = {
         });
         
       } catch (error) {
-        
+        console.error(
+          "An error occurred while trying to find the product:",
+          error
+        );
+        res.status(500).json({ error: "Failed to find the product" });
+      }
+    },
+
+    async featuredProducts(req, res){
+      try {
+        const products = await Products.featuredProducts()
+
+        if(products.affectedRows === 0){
+          return res.status(404).json({
+            status: 404,
+            errMsg: 'Products not found'
+          })
+        }
+
+        return res.json({
+          status: res.statusCode,
+          products
+        })
+      } catch (error) {
+        console.error(
+          "An error occurred while trying to fetch the products:",
+          error
+        );
+        res.status(500).json({ error: "Failed to fetch the products" });
       }
     }
 };

@@ -63,6 +63,19 @@ class Products {
       console.log('An error occurred while trying to find the product:', error);
     }
   }
+
+  // Featured Products
+
+  static async featuredProducts(){
+    try {
+      const query = `SELECT bmxID, prodName, prodDesc, quantity, amount, category, prodUrl FROM Products LIMIT 4`
+      const [results] = await db.query(query)
+
+      return results
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = Products
