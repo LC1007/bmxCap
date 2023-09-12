@@ -120,4 +120,26 @@ module.exports = {
       res.status(500).json({ error: "Failed to delete the product" });
     }
   },
+
+    async findProduct(req, res){
+      try {
+        const { prodName } = req.params
+        const product = await Products.findProduct(prodName)
+
+        if(product.affectedRows === 0){
+          return res.status(404).json({
+            status: 404,
+            errMsg: "Product not found",
+          });
+        }
+
+        return res.json({
+          status: res.statusCode,
+          product,
+        });
+        
+      } catch (error) {
+        
+      }
+    }
 };
