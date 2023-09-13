@@ -42,10 +42,11 @@ module.exports = {
 
             const token = createToken(user)
 
-            res.status(200).json({
-                status: 200,
+            res.status(201).json({
+                status: 201,
                 token,
-                msg: 'User has been registered'
+                msg: 'User has been registered',
+                user
             })
         } catch (error) {
             console.log(error);
@@ -156,6 +157,11 @@ module.exports = {
                 const token = createToken(user);
 
                 const userData = await User.findUserByEmail(user.emailAdd)
+
+                res.cookie('jwt', token, {
+                    httpOnly: true,
+                    maxAge: 360000
+                })
 
                 return res.json({ 
                     token,

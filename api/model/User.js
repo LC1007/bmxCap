@@ -67,6 +67,18 @@ class User {
       throw error; 
     }
   }
+
+  static async findUserByID(userID){
+     try {
+      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, userRole, profileUrl FROM Users WHERE userID = ?`;
+      const [rows] = await db.query(query, [userID]);
+
+      console.log("User found:", rows[0]);
+      return rows[0];
+    } catch (error) {
+      throw error; 
+    }
+  }
 }
 
 module.exports = User

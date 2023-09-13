@@ -7,27 +7,29 @@ function createToken(user) {
   return token;
 }
 
-const verifyToken = (req, res, next) =>{
-    const token = req.cookies.jwtToken;
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.jwt;
 
-    if(token){
-        verify(token, process.env.SECRET_KEY, (err, decodedToken) =>{
-            if(err){
-                console.log(err.message);
-            } else{
-                console.log(decodedToken);
-                next()
-            }
-        })  
-    } else{
-        res.json({
-            errMsg: 'You need to login to visit /products'
-        })
-    }
-}
-
+  if (token) {
+    verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
+      if (err) {
+        console.error(err);
+        return res.status(401).json({
+          errMsg: "Token is invalid or has expired.",
+        });
+      } else {
+        req.decodedToken = decodedToken
+        next();
+      }
+    });
+  } else {
+    res.status(401).json({
+      errMsg: "Token is missing",
+    });
+  }
+};
 
 module.exports = {
-    createToken,
-    verifyToken
-}
+  createToken,
+  verifyToken,
+};
