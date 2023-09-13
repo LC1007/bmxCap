@@ -8,7 +8,7 @@ function createToken(user) {
 }
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.loggedInUser;
+  const token = req.cookies.jwt;
 
   if (token) {
     verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
@@ -23,7 +23,9 @@ const verifyToken = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).set('Location',"/login").end()
+    res.status(401).json({
+      errMsg: "Token is missing",
+    });
   }
 };
 
