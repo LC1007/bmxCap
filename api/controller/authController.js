@@ -51,7 +51,7 @@ module.exports = {
             console.log(error);
             res
               .status(500)
-              .json({ msg: "An error occurred while registering the user" });
+              .json({ errMsg: "An error occurred while registering the user" });
         }
     },
 
