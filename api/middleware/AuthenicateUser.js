@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({
+    res.status(401).redirect("/login").json({
       errMsg: "Token is missing",
     });
   }
