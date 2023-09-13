@@ -8,7 +8,7 @@ function createToken(user) {
 }
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.cookies.loggedInUser;
 
   if (token) {
     verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
