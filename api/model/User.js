@@ -13,7 +13,7 @@ class User {
 
   static async fetchUsers(){
     try {
-      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, userRole FROM Users`
+      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, profileUrl, userRole FROM Users`
       const [results] = await db.query(query)
       return results
     } catch (error) {
@@ -24,7 +24,7 @@ class User {
 
   static async fetchUser(userID){
     try {
-      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, userRole FROM Users WHERE userID = ?`;
+      const query = `SELECT userID, firstName, lastName, gender, userDOB, emailAdd, userPass, profileUrl, userRole FROM Users WHERE userID = ?`;
       const [result] = await db.query(query, [userID])
 
       return result
