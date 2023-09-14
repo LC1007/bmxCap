@@ -8,7 +8,7 @@ module.exports = {
       if (!products) {
         return res.status(404).json({
           status: 404,
-          errMsg: "Products not found",
+          msg: "Products not found",
         });
       }
 
@@ -34,7 +34,7 @@ module.exports = {
       if (!result) {
         return res.status(404).json({
           status: 404,
-          errMsg: "Product not found",
+          msg: "Product not found",
         });
       }
 
@@ -102,7 +102,7 @@ module.exports = {
       if (product.affectedRows === 0) {
         return res.status(404).json({
           status: 404,
-          errMsg: "Product not found",
+          msg: "Product not found",
         });
       }
 
@@ -129,7 +129,7 @@ module.exports = {
         if(product.affectedRows === 0){
           return res.status(404).json({
             status: 404,
-            errMsg: "Product not found",
+            msg: "Product not found",
           });
         }
 
@@ -154,7 +154,7 @@ module.exports = {
         if(products.affectedRows === 0){
           return res.status(404).json({
             status: 404,
-            errMsg: 'Products not found'
+            msg: 'Products not found'
           })
         }
 

@@ -10,7 +10,7 @@ module.exports = {
             if(!result){
                 return res.status(404).json({
                     status: 404,
-                    errMsg: "Something went wrong trying to add product to the cart"
+                    msg: "Something went wrong trying to add product to the cart"
                 })
             }
 
@@ -34,7 +34,7 @@ module.exports = {
             if (orders.length === 0) {
               return res.status(404).json({
                 status: 404,
-                errMsg: "No orders found",
+                msg: "No orders found",
               });
             }
 
@@ -59,7 +59,7 @@ module.exports = {
             if (order.affectedRows === 0) {
               return res.json({
                 status: res.statusCode,
-                errMsg: "Order not found",
+                msg: "Order not found",
               });
             }
 

@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
       if (err) {
         console.error(err);
         return res.status(401).json({
-          errMsg: "Token is invalid or has expired.",
+          msg: "Token is invalid or has expired.",
         });
       } else {
         req.decodedToken = decodedToken
@@ -24,7 +24,7 @@ const verifyToken = (req, res, next) => {
     });
   } else {
     res.status(401).json({
-      errMsg: "Token is missing",
+      msg: "Token is missing",
     });
   }
 };
