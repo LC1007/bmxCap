@@ -56,8 +56,8 @@ class Products {
   static async findProduct(prodName){
     try {
       const query = `SELECT bmxID, prodName, prodDesc, quantity, amount, category, prodUrl FROM Products WHERE prodName LIKE ?`
-      const [result] = await db.query(query, ['%' + prodName + '%'])
-      return result
+      const [product] = await db.query(query, ['%' + prodName + '%'])
+      return product;
     } catch (error) {
       console.log('An error occurred while trying to find the product:', error);
     }

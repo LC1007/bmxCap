@@ -126,7 +126,7 @@ module.exports = {
         const { prodName } = req.params
         const product = await Products.findProduct(prodName)
 
-        if(product.affectedRows === 0){
+        if(product.length === 0){
           return res.status(404).json({
             status: 404,
             msg: "Product not found",
@@ -139,11 +139,11 @@ module.exports = {
         });
         
       } catch (error) {
-        console.error(
-          "An error occurred while trying to find the product:",
-          error
-        );
-        res.status(500).json({ error: "Failed to find the product" });
+            console.error(
+              "An error occurred while trying to find the product:",
+              error
+            );
+            res.status(500).json({ error: "Failed to find the product" });
       }
     },
 
