@@ -14,7 +14,7 @@ router.patch('/user/:userID', authController.updateUser)
 router.get('/logout', authController.logout)
 
 // Delete logged in user's account
-router.delete("/user/:userID", authController.updateUser);
+router.delete("/user/:userID", authController.deleteUser);
 
 // Create user
 router.post('/register', authController.register)

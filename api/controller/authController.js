@@ -1,5 +1,5 @@
 const passport = require("../middleware/passport");
-const bcrypt = require("bcrypt");
+const { hash, hashSync} = require("bcrypt");
 const User = require("../model/User");
 const { createToken } = require('../middleware/AuthenicateUser')
 
@@ -26,7 +26,7 @@ module.exports = {
                 })
             }
 
-            const hashedPassword = await bcrypt.hash(userPass, 10)
+            const hashedPassword = await hash(userPass, 10)
 
             const user = {
               firstName,
@@ -53,6 +53,27 @@ module.exports = {
             res
               .status(500)
               .json({ msg: "An error occurred while registering the user" });
+        }
+    },
+
+    async updateUser(req, res){
+        try {
+            const { userID } = req.params
+            const user = req.body
+
+            if(user.userPass){
+                user.userPass = hashSync(user.userPass, 10)
+            }
+
+            const editedUser = await User.updateUser(user, userID)
+
+            return res.status(200).json({
+              status: 200,
+              msg: "User has been updated",
+              editedUser,
+            });
+        } catch (error) {
+            
         }
     },
 
@@ -103,25 +124,25 @@ module.exports = {
         }
     },
 
-    async updateUser(req, res){
-        try {
-            const { userID } = req.params
-            const data = req.body
-            const user = await User.updateUser(data, userID)
+    // async updateUser(req, res){
+    //     try {
+    //         const { userID } = req.params
+    //         const data = req.body
+    //         const user = await User.updateUser(data, userID)
 
-            return res.json({
-              status: res.statusCode,
-              msg: "User has been updated",
-              user,
-            });
-        } catch (error) {
-            console.error(
-              "An error occurred while trying to update user:",
-              error
-            );
-            res.status(500).json({ error: "Failed to update the user" });
-        }
-    },
+    //         return res.json({
+    //           status: res.statusCode,
+    //           msg: "User has been updated",
+    //           user,
+    //         });
+    //     } catch (error) {
+    //         console.error(
+    //           "An error occurred while trying to update user:",
+    //           error
+    //         );
+    //         res.status(500).json({ error: "Failed to update the user" });
+    //     }
+    // },
 
     async deleteUser(req, res){
         try {
