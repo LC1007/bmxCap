@@ -57,7 +57,6 @@ class Products {
     try {
       const query = `SELECT bmxID, prodName, prodDesc, quantity, amount, category, prodUrl FROM Products WHERE prodName LIKE ?`
       const [result] = await db.query(query, ['%' + prodName + '%'])
-      console.log(query);
       return result
     } catch (error) {
       console.log('An error occurred while trying to find the product:', error);
